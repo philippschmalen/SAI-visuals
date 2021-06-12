@@ -1,0 +1,14 @@
+ci:
+  main:
+    blue: "#000099"
+    green: "#99ff00"
+    gray: "#999999"
+  colorscale:
+    saigreen: 
+      - "#99ff00"
+      - "#ff80a6"
+      - "#3612b3"
+      - "#cc0059"
+      - "#999999"
+      - "#000099"
+      - "#a68cff"

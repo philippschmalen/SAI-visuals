@@ -1,6 +1,4 @@
-
-
-# hidden files and dotfiles
+# hidden files (dotfiles)
 .*
 !/.gitignore
 
