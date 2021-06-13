@@ -1,6 +1,8 @@
 # hidden files (dotfiles)
 .*
 !/.gitignore
+!.gitkeep
+!*.csv
 
 # pre-commit configuration
 pyproject.toml
