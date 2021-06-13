@@ -4,6 +4,19 @@ SAI visualizations
 Make visuals and analyses in the CI design of SAI. 
 Sustainable Aviation Initiative - Data Science task group. 
 
+## Getting started
+
+Open Anaconda prompt
+```bash
+# create conda env from file
+conda env create -f conda_env.yaml
+# activate
+conda activate sai
+# run streamlit app
+streamlit run app.py
+```
+
+
 Project Organization
 ------------
 

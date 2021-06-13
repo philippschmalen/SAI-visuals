@@ -12,8 +12,8 @@ import pandas as pd
 from datetime import datetime
 from glob import glob
 
-import src.data.gtrends_extract as gt
 import src.data.utilities as data_utils
+import src.data.gtrends_extract as gt
 import src.data.transform_data as data_transform
 import src.visuals.plotly_utilities as plt_utils
 
@@ -30,15 +30,17 @@ st.title("Sustainable Aviation Initiative - Visuals")
 raw_data_csv_files = st.sidebar.selectbox(
     "Select data", options=glob("data/raw/*csv"), format_func=lambda x: x.split("\\")[-1]
 )
-df_raw = data_utils.load_data(filepath=raw_data_csv_files, parse_dates=["date"])
+df_raw = data_utils.load_data(
+    filepath=raw_data_csv_files, parse_dates=["date"]
+).set_index("date")
+
 df = data_transform.group_search_interest_on_time_unit(df=df_raw)
 
 # ----------------------------------------
 # -- Main plot
 # ----------------------------------------
-# set SAI template
 plt_utils.set_layout_template(colorscale=plt_utils.load_colorscale("settings.yaml"))
-# line plot
+
 fig = px.line(
     df,
     x="date",
@@ -50,27 +52,26 @@ fig = px.line(
     template="sai",
 )
 
-# layout tweaks
+
 # SAI logo
 fig.add_layout_image(
     dict(
         source="https://i.ibb.co/F0Z3nRf/SAI-LOGO-without-Base-Color.png",
         xref="paper",
         yref="paper",
-        x=1,
-        y=0.05,
+        x=0.3,
+        y=0.8,
         sizex=0.3,
         sizey=0.3,
         xanchor="right",
         yanchor="bottom",
     )
 )
+# layout tweaks
 fig.update_traces(line=dict(width=5))  # thicker line
 fig.update_layout(plot_bgcolor="white")  # white background
 st.plotly_chart(fig)
 
-
-st.stop()
 
 # ----------------------------------------
 # -- query search interest
