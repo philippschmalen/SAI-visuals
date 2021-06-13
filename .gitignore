@@ -2,7 +2,7 @@
 .*
 !/.gitignore
 !.gitkeep
-!*.csv
+!/data/raw/*
 
 # pre-commit configuration
 pyproject.toml
