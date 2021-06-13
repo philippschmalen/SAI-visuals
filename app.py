@@ -25,6 +25,29 @@ st.title("Sustainable Aviation Initiative - Visuals")
 
 
 # ----------------------------------------
+# -- query search interest
+# How to load data from Google trands:
+# ----------------------------------------
+keywords = ["sustainable aviation"]
+if st.sidebar.button(
+    f"Get current search interest for\n {', '.join(str(x) for x in keywords)}"
+):
+    ts = data_utils.timestamp_now()
+    timeframe = f'2019-06-01 {datetime.utcnow().strftime("%Y-%m-%d")}'
+    filepath = f"./data/raw/sus_aviation_trends_{ts}.csv"
+    filepath_failed = f"./data/raw/sus_aviation_trends_FAILED_{ts}.csv"
+
+    search_interest = gt.get_interest_over_time(
+        keyword_list=keywords,
+        filepath=filepath,
+        filepath_failed=filepath_failed,
+        timeframe=timeframe,
+    )
+
+    st.info(f"Loaded CSV to {filepath}.")
+
+
+# ----------------------------------------
 # -- load data
 # ----------------------------------------
 raw_data_csv_files = st.sidebar.selectbox(
@@ -71,28 +94,3 @@ fig.add_layout_image(
 fig.update_traces(line=dict(width=5))  # thicker line
 fig.update_layout(plot_bgcolor="white")  # white background
 st.plotly_chart(fig)
-
-
-# ----------------------------------------
-# -- query search interest
-# How to load data from Google trands:
-# ----------------------------------------
-keywords = ["sustainable aviation"]
-if st.sidebar.button(
-    f"Get current search interest for\n {', '.join(str(x) for x in keywords)}"
-):
-    ts = data_utils.timestamp_now()
-    timeframe = f'2019-06-01 {datetime.utcnow().strftime("%Y-%m-%d")}'
-    filepath = f"./data/raw/sus_aviation_trends_{ts}.csv"
-    filepath_failed = f"./data/raw/sus_aviation_trends_FAILED_{ts}.csv"
-
-    search_interest = gt.get_interest_over_time(
-        keyword_list=keywords,
-        filepath=filepath,
-        filepath_failed=filepath_failed,
-        timeframe=timeframe,
-    )
-
-    st.info(f"Loaded CSV to {filepath}.")
-
-st.stop()

@@ -294,7 +294,9 @@ def get_interest_over_time(
             # random int from range around timeout
             timeout_randomized = randint(timeout - 3, timeout + 3)
             try:
-                df = query_interest_over_time(kw_batch, date_index=date_index)
+                df = query_interest_over_time(
+                    kw_batch, date_index=date_index, timeframe=timeframe
+                )
 
             # query unsuccessful
             except Exception as e:
