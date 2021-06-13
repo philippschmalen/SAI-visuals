@@ -33,7 +33,7 @@ if st.sidebar.button(
     f"Get current search interest for\n {', '.join(str(x) for x in keywords)}"
 ):
     ts = data_utils.timestamp_now()
-    timeframe = f'2019-06-01 {datetime.utcnow().strftime("%Y-%m-%d")}'
+    timeframe = "today 5-y"  # f'2019-06-01 {datetime.utcnow().strftime("%Y-%m-%d")}'
     filepath = f"./data/raw/sus_aviation_trends_{ts}.csv"
     filepath_failed = f"./data/raw/sus_aviation_trends_FAILED_{ts}.csv"
 
